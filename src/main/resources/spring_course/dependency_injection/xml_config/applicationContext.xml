@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-4.1.xsd">
+
+    <!-- Constructor injection -->
+    <bean class="spring_course.dependency_injection.xml_injection.beans.Person" id="con_inj">
+        <constructor-arg name="name" value="sepehr"/>
+        <constructor-arg name="lastName" value="mollaei"/>
+        <constructor-arg name="age" type="int" value="20"/>
+    </bean>
+
+    <!-- Setter injection -->
+    <bean class="spring_course.dependency_injection.xml_injection.beans.Person" id="set_inj">
+        <property name="name" value="sepehr"/>
+        <property name="lastName" value="mollaei"/>
+        <property name="age" value="20"/>
+    </bean>
+
+    <!-- You can define init or destroy method for dependencies -->
+    <bean class="spring_course.dependency_injection.xml_injection.beans.Person" id="init_destroy"
+          init-method="initPerson" destroy-method="destroyPerson">
+        <property name="name" value="sepehr"/>
+        <property name="lastName" value="mollaei"/>
+        <property name="age" value="20"/>
+    </bean>
+
+    <!-- You can inject by references that made at previous lines -->
+    <bean class="spring_course.dependency_injection.xml_injection.beans.Family" id="family">
+        <property name="father" ref="con_inj"/>
+        <property name="mother" ref="set_inj"/>
+    </bean>
+
+    <!-- Each bean has specific scope that we can define
+     at here show you 'singleton' and 'prototype' scopes
+      singleton means every bean points to the one space in memory
+      prototype means every bean has its own space
+      by default each bean have singleton scope that have created in the previous lines
+      you can see its differences in test packages -->
+    <bean class="spring_course.dependency_injection.xml_injection.beans.Person" id="pro_person" scope="prototype" >
+        <property name="name" value="sepehr"/>
+        <property name="lastName" value="mollaei"/>
+        <property name="age" value="20"/>
+    </bean>
+
+    <!-- Inject by properties file -->
+    <context:property-placeholder location="classpath:properties/application.properties"/>
+
+    <bean class="spring_course.dependency_injection.xml_injection.beans.Person" id="prop_person">
+        <property name="name" value="${person.name}"/>
+        <property name="lastName" value="${person.lastName}"/>
+        <property name="age" value="20"/>
+    </bean>
+
+
+</beans>
