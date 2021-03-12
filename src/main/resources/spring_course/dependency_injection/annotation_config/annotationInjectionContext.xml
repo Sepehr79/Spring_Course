@@ -8,5 +8,4 @@
     http://www.springframework.org/schema/context/spring-context-4.1.xsd">
 
     <context:component-scan base-package="spring_course.dependency_injection.annotation_injection.beans"/>
-
 </beans>

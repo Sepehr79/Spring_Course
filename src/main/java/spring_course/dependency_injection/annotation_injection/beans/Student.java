@@ -3,18 +3,20 @@ package spring_course.dependency_injection.annotation_injection.beans;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
 @Scope("prototype")
+@PropertySource("properties/application.properties")
 public class Student {
 
     // default value
-    @Value("sepehr")
+    @Value("${person.name}")
     private String name;
 
-    @Value("mollaei")
+    @Value("${person.lastName}")
     private String lastName;
 
     @Value("20")
