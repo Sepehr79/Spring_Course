@@ -16,7 +16,7 @@ public class TestXmlInjection {
 
     @BeforeEach
     public void createNewContext(){
-        context = new ClassPathXmlApplicationContext("spring_course/dependency_injection/xml_config/applicationContext.xml");
+        context = new ClassPathXmlApplicationContext("spring_course/dependency_injection/xml_config/xmlInjectionContext.xml");
     }
 
     @Test
