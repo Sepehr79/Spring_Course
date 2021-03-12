@@ -1,4 +1,4 @@
-# Spring math
+# Spring learning
 In this repository I try to learn spring. you can see configurations file in the main/resources directory with is important to
 learn spring.
 
