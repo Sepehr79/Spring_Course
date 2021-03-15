@@ -2,6 +2,7 @@ package spring_course.database.jdbctemplate.beans;
 
 public class Emp {
 
+
     private String name;
     private String lastName;
     private int age;

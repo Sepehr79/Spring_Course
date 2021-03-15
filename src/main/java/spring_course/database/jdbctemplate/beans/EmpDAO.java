@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component("empDao")
@@ -38,18 +39,36 @@ public class EmpDAO {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            return getEmpByResultSet(resultSet);
+            if (resultSet.next()){
+                String name = resultSet.getString("name");
+                String lastName = resultSet.getString("lastName");
+                int age = resultSet.getInt("age");
+                Gender gender = (resultSet.getString("gender").equals("MALE"))?Gender.MALE:Gender.FEMALE;
+
+                return new Emp(name, lastName, age, gender, id);
+            }
+            return null;
         });
     }
 
     public List<Emp> getEmps(){
-        return template.query("select * from Emp",
-                (resultSet, i) ->
-                        new Emp(resultSet.getString("name"),
-                resultSet.getString("lastName"),
-                resultSet.getInt("age"),
-                (resultSet.getString("gender").equals("MALE"))?Gender.MALE:Gender.FEMALE,
-                resultSet.getInt("id")));
+        return template.execute("select * from Emp", (PreparedStatementCallback<List<Emp>>) preparedStatement ->
+        {
+            List<Emp> empList = new ArrayList<>();
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+                Emp emp = new Emp(resultSet.getString("name"),
+                        resultSet.getString("lastName"),
+                        resultSet.getInt("age"),
+                        resultSet.getString("gender").equals("MALE")?Gender.MALE:Gender.FEMALE,
+                        resultSet.getInt("id"));
+
+                empList.add(emp);
+            }
+            return empList;
+        });
     }
 
     public void deleteEmp(Emp emp){
@@ -58,19 +77,6 @@ public class EmpDAO {
 
     public void resetEmp(){
         template.execute("delete from Emp");
-    }
-
-    private Emp getEmpByResultSet(ResultSet resultSet) throws SQLException {
-        if (resultSet.next()){
-            String name = resultSet.getString("name");
-            String lastName = resultSet.getString("lastName");
-            int age = resultSet.getInt("age");
-            Gender gender = (resultSet.getString("gender").equals("MALE"))?Gender.MALE:Gender.FEMALE;
-            int id = resultSet.getInt("id");
-
-            return new Emp(name, lastName, age, gender, id);
-        }
-        return null;
     }
 
 }
