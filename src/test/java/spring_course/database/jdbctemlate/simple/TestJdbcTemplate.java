@@ -73,6 +73,17 @@ public class TestJdbcTemplate {
         Assertions.assertEquals(editedEmp.getName(), "sepehr2");
     }
 
+    @Test
+    public void testDeleteEmp(){
+        dao.saveEmp(new Emp("sepehr", "mollaei", 20, Gender.MALE, 123));
+
+        dao.deleteEmp(123);
+
+        Emp deletedEmp = dao.getEmp(123);
+
+        Assertions.assertNull(deletedEmp);
+    }
+
     @AfterEach
     public void deleteEmpDatabase(){
         dao.resetEmp();

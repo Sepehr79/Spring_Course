@@ -71,8 +71,8 @@ public class EmpDAO {
         });
     }
 
-    public void deleteEmp(Emp emp){
-        template.update("delete from Emp where id = ?", emp.getId());
+    public void deleteEmp(int id){
+        template.update("delete from Emp where id = ?", id);
     }
 
     public void resetEmp(){
