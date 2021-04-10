@@ -8,6 +8,10 @@ learn spring.
 simple java classes and beans are in the /java directory and also you can check test cases in the /test which provides a simple implementation of spring coding
 
 ### Topics
-* Dependency injection
-* Jdbc template
-* Spring with [hibernate](https://github.com/Sepehr79/Hibernate_Course)
+* Dependency Injection
+* Jdbc Template
+* Spring With [hibernate](https://github.com/Sepehr79/Hibernate_Course)
+* Spring Test With (SpringJUnit4ClassRunner)
+* Spring AOP(Aspect Oriented Programming)
+    * Before
+ 
