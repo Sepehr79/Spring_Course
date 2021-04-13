@@ -9,4 +9,13 @@ public class Logic {
         System.out.println("processLogic method invoked!");
     }
 
+    public void processSignup(){
+        System.out.println("processSignup method invoked!");
+    }
+
+    public int processWithReturn(){
+        System.out.println("processWithReturn invoked!");
+        return 0;
+    }
+
 }

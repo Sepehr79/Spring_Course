@@ -22,6 +22,11 @@ public class Before {
         // output:
         // Run Before advice!
         // processLogic method invoked!
+
+        logic.processWithReturn();
+        // output:
+        // Run before returning advice!
+        // processWithReturn invoked!
     }
 
     /*
