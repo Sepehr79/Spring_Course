@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.util.Assert;
 import spring_course.database.springwithhibernate.dao.StudentDao;
 import spring_course.database.springwithhibernate.entity.Student;
 
@@ -35,9 +34,26 @@ public class TestStudentDao {
         // save at database
         studentDao.addStudent(student);
 
-        List<Student> insertedStudents = studentDao.getStudentsByQuery("from Student where name = 'sepehr'");
+        List<Student> insertedStudents = studentDao.getStudents();
 
         Assertions.assertEquals(insertedStudents.size(), 1);
+    }
+
+    @Test
+    public void testDeleteStudent(){
+
+        saveStudent();
+
+        Student student = studentDao.getStudentByQuery("from Student where name = 'sepehr'");
+
+        Assertions.assertEquals(student.getName(), "sepehr");
+
+        studentDao.deleteStudent(student);
+
+        List<Student> insertedStudents = studentDao.getStudents();
+
+        Assertions.assertEquals(insertedStudents.size(), 0);
+
     }
 
 }

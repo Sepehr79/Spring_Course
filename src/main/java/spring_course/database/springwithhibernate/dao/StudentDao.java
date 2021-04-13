@@ -3,13 +3,16 @@ package spring_course.database.springwithhibernate.dao;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import spring_course.database.springwithhibernate.entity.Student;
 
 import java.util.List;
 
 @Component("studentDao")
+@Repository
+@Transactional
 public class StudentDao {
 
     private final SessionFactory sessionFactory;
@@ -24,20 +27,17 @@ public class StudentDao {
     }
 
     public void addStudent(Student student){
+        Session session = sessionFactory.getCurrentSession();
 
-        Session session = sessionFactory.openSession();
-        try {
-            session.beginTransaction();
+        session.save(student);
+    }
 
-            session.save(student);
+    public List<Student> getStudents(){
+        Session session = sessionFactory.getCurrentSession();
 
-            session.getTransaction().commit();
-        }catch (Exception exception){
-            exception.printStackTrace();
-            session.getTransaction().rollback();
-        }finally {
-            session.close();
-        }
+        List<Student> students = session.createQuery("from Student").getResultList();
+
+        return students;
     }
 
     /**
@@ -46,96 +46,45 @@ public class StudentDao {
      * @return null if student not found
      */
     public Student getStudentById(int id){
-        Session session = sessionFactory.openSession();
-        try {
-            session.beginTransaction();
+        Session session = sessionFactory.getCurrentSession();
 
-            Student student = session.get(Student.class, id);
+        Student student = session.get(Student.class, id);
 
-            session.getTransaction().commit();
-
-            return student;
-        }catch (Exception exception){
-            exception.printStackTrace();
-            session.getTransaction().rollback();
-        }finally {
-            session.close();
-        }
-
-        return null;
+        return student;
     }
 
     public List<Student> getStudentsByQuery(String query){
-        Session session = sessionFactory.openSession();
-        List<Student> students = null;
+        Session session = sessionFactory.getCurrentSession();
 
-        try {
-            session.beginTransaction();
-
-            students = session.createQuery(query).getResultList();
-
-            session.getTransaction().commit();
-
-            return students;
-        }catch (Exception exception){
-            exception.printStackTrace();
-            session.getTransaction().rollback();
-        }finally {
-            session.close();
-        }
+        List<Student> students = session.createQuery(query).getResultList();
 
         return students;
     }
 
+    public Student getStudentByQuery(String hql){
+        Session session = sessionFactory.getCurrentSession();
+
+        Student student = (Student) session.createQuery(hql).uniqueResult();
+
+        return student;
+    }
+
     public void deleteStudent(Student student){
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
 
-        try {
-            session.beginTransaction();
-
-            session.delete(student);
-
-            session.getTransaction().commit();
-        }catch (Exception exception){
-            exception.printStackTrace();
-            session.getTransaction().rollback();
-        }finally {
-            session.close();
-        }
+        session.delete(student);
     }
 
     public void updateStudent(Student student){
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
 
-        try {
-            session.beginTransaction();
-
-            session.update(student);
-
-            session.getTransaction().commit();
-        }catch (Exception exception){
-            exception.printStackTrace();
-            session.getTransaction().rollback();
-        }finally {
-            session.close();
-        }
+        session.update(student);
     }
 
     public void resetDataBase(){
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
 
-        try {
-            session.beginTransaction();
-
-            session.createQuery("delete from Student").executeUpdate();
-
-            session.getTransaction().commit();
-        }catch (Exception exception){
-            exception.printStackTrace();
-            session.getTransaction().rollback();
-        }finally {
-            session.close();
-        }
+        session.createQuery("delete from Student").executeUpdate();
     }
 
 }
