@@ -12,7 +12,7 @@ public class BeforeAspect {
     /**
      * This method will be executed before invoke 'processLogic' method
      */
-    @Before("execution(void spring_course.aop.before.beans.Logic.process*())")
+    @Before("execution(void spring_course.aop.before.beans.Logic.process*(int, spring_course.aop.before.beans.Person, *, ..))")
     public void beforeMethod(){
         System.out.println("Run before void advice!");
     }

@@ -7,6 +7,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import spring_course.aop.before.AspectConfig;
 import spring_course.aop.before.beans.Logic;
+import spring_course.aop.before.beans.Person;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -18,7 +19,7 @@ public class Before {
 
     @Test
     public void testBeforeAdvice(){
-        logic.processLogic();
+        logic.processLogic(5, new Person("sepehr", "mollaei"), false, "fewf", 456);
         // output:
         // Run Before advice!
         // processLogic method invoked!

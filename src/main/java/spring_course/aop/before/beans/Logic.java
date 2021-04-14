@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 @Component("logic")
 public class Logic {
 
-    public void processLogic(){
+    public void processLogic(int number, Person person, boolean anyArg, String first, Integer second){
         System.out.println("processLogic method invoked!");
     }
 
