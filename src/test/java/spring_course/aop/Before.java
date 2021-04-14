@@ -22,11 +22,12 @@ public class Before {
         logic.processLogic(5, new Person("sepehr", "mollaei"), false, "fewf", 456);
         // output:
         // Run Before advice!
-        // processLogic method invoked!
+        // Matches any method
+        // processLogic invoked!
 
         logic.processWithReturn();
         // output:
-        // Run before returning advice!
+        // Matches any method
         // processWithReturn invoked!
     }
 

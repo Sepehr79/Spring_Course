@@ -17,9 +17,9 @@ public class BeforeAspect {
         System.out.println("Run before void advice!");
     }
 
-    @Before("execution(int process*())")
+    @Before("execution(* spring_course.aop.before.beans.*.*(..))") // Matches any methods in arg package
     public void beforeReturningMethod(){
-        System.out.println("Run before returning advice!");
+        System.out.println("Matches any method");
     }
 
 }
