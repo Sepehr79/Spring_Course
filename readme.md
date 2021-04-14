@@ -10,8 +10,9 @@ simple java classes and beans are in the /java directory and also you can check 
 ### Topics
 * Dependency Injection
 * Jdbc Template
-* Spring With [hibernate](https://github.com/Sepehr79/Hibernate_Course)
+* Spring With [Hibernate](https://github.com/Sepehr79/Hibernate_Course)
 * Spring Test With (SpringJUnit4ClassRunner)
 * Spring AOP(Aspect Oriented Programming)
+    * Pointcut Expressions
     * Before
  
