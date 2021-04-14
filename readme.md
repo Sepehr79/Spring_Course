@@ -1,4 +1,4 @@
-# Spring learning
+# Learning Spring
 
 ![Spring_logo](pictures/31-314820_logo-spring-spring-framework-logo-svg.jpg)
 
