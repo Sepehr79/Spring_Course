@@ -8,6 +8,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import spring_course.aop.before.AspectConfig;
 import spring_course.aop.before.beans.Logic;
 import spring_course.aop.before.beans.Person;
+import spring_course.aop.before.beans.Phone;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -16,6 +17,9 @@ public class Before {
 
     @Autowired
     private Logic logic;
+
+    @Autowired
+    private Phone phone;
 
     @Test
     public void testBeforeAdvice(){
@@ -29,6 +33,11 @@ public class Before {
         // output:
         // Matches any method
         // processWithReturn invoked!
+
+        phone.call();
+        // output:
+        // Before call method
+        // Call method invoked!
     }
 
     /*

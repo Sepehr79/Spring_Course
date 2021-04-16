@@ -1,5 +1,7 @@
 package spring_course.aop.before.beans;
 
+import org.springframework.stereotype.Component;
+
 public class Person {
 
     private String name;
