@@ -1,9 +1,11 @@
 package spring_course.aop.before.beans.aspect;
 
 
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 
 @Aspect
@@ -14,8 +16,20 @@ public class BeforeAspect {
     public void processAspect(){}
 
     @Before("processAspect()")
-    public void beforeMethod(){
+    public void beforeMethod(JoinPoint point){
         System.out.println("Run before void advice!");
+
+        // Get method signature
+        MethodSignature signature = (MethodSignature) point.getSignature();
+
+        System.out.println(signature);
+
+        // Get method arguments
+        Object[] args = point.getArgs();
+
+        for (Object arg: args)
+            System.out.println(arg);
+
     }
 
     @Before("processAspect()")
