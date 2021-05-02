@@ -7,6 +7,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import spring_course.aop.AspectConfig;
 import spring_course.aop.beans.Person;
+import spring_course.aop.beans.Sorter;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -15,6 +16,9 @@ public class BeforeAdvice {
 
     @Autowired
     private Person person;
+
+    @Autowired
+    private Sorter sorter;
 
     @Test
     public void testBeforeAdvice(){
