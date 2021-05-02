@@ -1,43 +1,39 @@
-package spring_course.aop;
+package spring_course.aop.before;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import spring_course.aop.before.AspectConfig;
-import spring_course.aop.before.beans.Logic;
-import spring_course.aop.before.beans.Person;
-import spring_course.aop.before.beans.Phone;
+import spring_course.aop.AspectConfig;
+import spring_course.aop.beans.Person;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {AspectConfig.class})
-public class Before {
+public class BeforeAdvice {
 
     @Autowired
-    private Logic logic;
-
-    @Autowired
-    private Phone phone;
+    private Person person;
 
     @Test
     public void testBeforeAdvice(){
-        logic.processLogic(5, new Person("sepehr", "mollaei"), false, "fewf", 456);
-        // output:
-        // Run Before advice!
-        // Matches any method
-        // processLogic invoked!
 
-        logic.processWithReturn();
+        person.setName("sepehr");
         // output:
-        // Matches any method
-        // processWithReturn invoked!
+        // Process before method with signature: void spring_course.aop.beans.Person.setName(String)
+        // Arg: sepehr
 
-        phone.call();
+        String name = person.getName();
         // output:
-        // Before call method
-        // Call method invoked!
+        // Process before method with signature: String spring_course.aop.beans.Person.getName()
+
+        person.talk("salam");
+        // output:
+        // Process before talk method
+        // Args: salam
+        // salam
+
     }
 
     /*
