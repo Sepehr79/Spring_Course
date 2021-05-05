@@ -15,13 +15,15 @@ public class SorterAfterReturningAspect {
 
     }
 
+    // Run after the method (success execution)
     @AfterReturning(value = "afterReturn()", returning = "result")
     public void processAfterReturn(JoinPoint point, int[] result){
 
 
         System.out.println("Run after returning result from sorter");
+        System.out.println("Method: " + point.getSignature());
 
-        // change minimum value from 0 to one
+        // modify returning object
         result[0] = 1;
 
     }
