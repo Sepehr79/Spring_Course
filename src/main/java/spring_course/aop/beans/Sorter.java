@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 public class Sorter {
 
     // Some process will execute after returning result
+    // Some process will execute after method
     public int[] bubbleSort(int[] arr){
 
         for (int i = 0 ; i < arr.length ; i++){
