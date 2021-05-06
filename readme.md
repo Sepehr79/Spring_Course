@@ -16,4 +16,5 @@ simple java classes and beans are in the /java directory and also you can check 
     * Pointcut Expressions
     * Before
     * AfterReturning
+    * AfterThrowing
  
